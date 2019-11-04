@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="freeboard">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
+
+	<resultMap id="freeboard" class="egovframework.example.sample.service.FreeboardVO">
+		<result property="freebid" column="freebid"/>
+		<result property="freebtitle" column="freebtitle"/>
+		<result property="freebcontent" column="freebcontent"/>
+		<result property="freebwriter" column="freebwriter"/>
+		<result property="freebviewcnt" column="freebviewcnt"/>
+	</resultMap>
+	
+	<insert id="freeboardDAO.insertFreeBoard">
+		<![CDATA[
+			INSERT INTO FREEBOARD 
+				( FREEBID, FREEBTITLE, FREEBCONTENT, FREEBWRITER)
+			VALUES ( #freebid#
+				  , #freebtitle#
+				  , #freebcontent#
+				  , #freebwriter# )
+		]]>
+	</insert>
+	
+	<update id="freeboardDAO.updateFreeboard">
+		<![CDATA[
+			UPDATE FREEBOARD
+			SET FREEBID=#freebid#
+				, FREEBTITLE=#freebtitle#
+				, FREEBCONTENT=#freebcontent#
+				, FREEBWRITER=#freebwriter#
+				, FREEBVIEWCNT = freebviewcnt+1
+			WHERE FREEBTITLE=#freebtitle#
+		]]>
+	</update>
+	
+	<select id="freeboardDAO.selectFreeboard" resultMap="freeboard">
+        <![CDATA[
+            SELECT
+                FREEBID,
+                FREEBTITLE,
+				FREEBCONTENT, 
+				FREEBWRITER,
+				FREEBVIEWCNT
+            FROM FREEBOARD 
+            WHERE FREEBTITLE=#freebtitle#
+        ]]>
+    </select>
+	
+	<select id="freeboardDAO.selectFreeboardList" parameterClass="searchVO" resultClass="egovMap">			
+					SELECT
+						FREEBID, FREEBTITLE, FREEBCONTENT, FREEBWRITER, FREEBVIEWCNT
+					FROM FREEBOARD
+					WHERE 1=1
+					<isEqual prepend="AND" property="searchCondition" compareValue="0">
+						FREEBTITLE LIKE CONCAT('%',#searchKeyword#,'%')
+					</isEqual>
+					<isEqual prepend="AND" property="searchCondition" compareValue="1">
+						FREEBWRITER LIKE CONCAT('%',#searchKeyword#,'%')
+					</isEqual>
+					ORDER BY FREEBTITLE DESC
+	</select>
+	
+	<select id="freeboardDAO.MainPage" parameterClass="searchVO" resultClass="egovMap">			
+			
+ 			SELECT FREEBID, FREEBTITLE, FREEBCONTENT, FREEBWRITER, FREEBVIEWCNT
+			FROM FREEBOARD
+
+	</select>
+	
+	<select id="freeboardDAO.selectFreeboardListTotCnt" parameterClass="searchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM FREEBOARD
+	</select>
+
+</sqlMap>

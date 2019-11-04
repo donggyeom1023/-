@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>college_web</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.wst.common.project.facet.core.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.wst.validation.validationbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.springframework.ide.eclipse.core.springbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.m2e.core.maven2Builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jem.workbench.JavaEMFNature</nature>
+		<nature>org.eclipse.wst.common.modulecore.ModuleCoreNature</nature>
+		<nature>org.eclipse.m2e.core.maven2Nature</nature>
+		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.springframework.ide.eclipse.core.springnature</nature>
+		<nature>egovframework.dev.imp.ide.natures.egovnature</nature>
+		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>src/main/java/egovframework/example/sample/service/PlanListService.java</name>
+			<type>1</type>
+			
+		</link>
+		<link>
+			<name>src/main/java/egovframework/example/sample/service/PlanListVO.java</name>
+			<type>1</type>
+			
+		</link>
+		<link>
+			<name>src/main/java/egovframework/example/sample/web/PlanListController.java</name>
+			<type>1</type>
+			
+		</link>
+		<link>
+			<name>src/main/resources/egovframework/sqlmap/example/sample/PlanList_SQL.xml</name>
+			<type>1</type>
+			
+		</link>
+		<link>
+			<name>src/main/java/egovframework/example/sample/service/impl/PlanListDAO.java</name>
+			<type>1</type>
+			
+		</link>
+		<link>
+			<name>src/main/java/egovframework/example/sample/service/impl/PlanListServiceImpl.java</name>
+			<type>1</type>
+			
+		</link>
+		<link>
+			<name>src/main/webapp/WEB-INF/jsp/egovframework/example/sample/planList.jsp</name>
+			<type>1</type>
+			
+		</link>
+	</linkedResources>
+</projectDescription>

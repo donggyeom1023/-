@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="classSelect">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
+
+	<resultMap id="classSelect" class="egovframework.example.sample.service.ClassSelectVO">
+		<result property="cno" column="cno"/>
+		<result property="clname" column="clname"/>
+		<result property="clftime" column="clftime"/>
+		<result property="cletime" column="cletime"/>
+		<result property="cldate" column="cldate"/>
+	</resultMap>
+	
+	<select id="classselectDAO.selectClassList" parameterClass="searchVO" resultClass="egovMap">			
+			
+ 			SELECT CNO, CLNAME, CLFTIME, CLETIME, CLDATE
+			FROM CLASSSELETE
+					
+	</select>
+	
+	<select id="classselectDAO.classdetailList" parameterClass="searchVO" resultClass="egovMap">			
+			
+ 			SELECT CNO, CLNAME, CLFTIME, CLETIME, CLDATE
+			FROM CLASSSELETE
+					
+	</select>
+	
+	<select id="classselectDAO.selectClassView" resultMap="classSelect">			
+			
+ 			SELECT CNO, CLNAME, CLFTIME, CLETIME, CLDATE
+			FROM CLASSSELETE
+			WHERE CLNAME=#clname#
+	</select>
+</sqlMap>

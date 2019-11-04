@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="board">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
+
+	<resultMap id="board" class="egovframework.example.sample.service.BoardVO">
+		<result property="bid" column="bid"/>
+		<result property="bname" column="bname"/>
+		<result property="content" column="content"/>
+		<result property="writer" column="writer"/>
+		<result property="views" column="views"/>
+	</resultMap>
+	
+	<update id="boardDAO.updateBoard">
+		<![CDATA[
+			UPDATE BOARD
+			SET BID=#bid#
+				, BNAME=#bname#
+				, CONTENT=#content#
+				, WRITER=#writer#
+				, VIEWS = views+1
+			WHERE BID=#bid#
+		]]>
+	</update>
+	
+	<select id="boardDAO.selectBoard" resultMap="board">
+        <![CDATA[
+            SELECT
+                BID,
+                BNAME,
+				CONTENT, 
+				WRITER,
+				VIEWS
+            FROM BOARD 
+            WHERE BID=#bid#
+        ]]>
+    </select>
+	
+	<select id="boardDAO.selectBoardList" parameterClass="searchVO" resultClass="egovMap">			
+					SELECT
+						BID, BNAME, CONTENT, WRITER, VIEWS
+					FROM BOARD
+					WHERE 1=1
+					<isEqual prepend="AND" property="searchCondition" compareValue="0">
+						BNAME LIKE '%' || #searchKeyword# || '%'
+					</isEqual>
+					<isEqual prepend="AND" property="searchCondition" compareValue="1">
+						WRITER LIKE '%' || #searchKeyword# || '%'
+					</isEqual>
+					ORDER BY BID DESC
+			
+					LIMIT #recordCountPerPage# OFFSET #firstIndex#
+	</select>
+	
+	<select id="boardDAO.MainPage" parameterClass="searchVO" resultClass="egovMap">			
+			
+ 			SELECT BID, BNAME, CONTENT, WRITER, VIEWS
+			FROM BOARD
+					
+	</select>
+	
+	<select id="boardDAO.selectBoardListTotCnt" parameterClass="searchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BOARD
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				BNAME LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				WRITER LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

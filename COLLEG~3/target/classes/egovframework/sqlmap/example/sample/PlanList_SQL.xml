@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PlanList">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
+
+	<resultMap id="PlanList" class="egovframework.example.sample.service.PlanListVO">
+		<result property="credate" column="credate"/>
+		<result property="cname" column="cname"/>
+		<result property="ccontent" column="ccontent"/>
+		<result property="professor" column="professor"/>
+		<result property="croom" column="croom"/>
+	</resultMap>
+	
+	<select id="planlistDAO.selectPlanList" parameterClass="searchVO" resultClass="egovMap">
+
+			SELECT
+				CREDATE, CNAME, CCONTENT, PROFESSOR, CROOM
+			FROM PLANLIST
+			order by CREDATE desc, PROFESSOR ASC
+	</select>
+	
+	<select id="planlistDAO.selectPlanListTotCnt" parameterClass="searchVO" resultClass="int">
+
+			SELECT COUNT(*) totcnt
+			FROM PLANLIST
+	</select>
+	
+	<insert id="planlistDAO.insertPlanList">
+		<![CDATA[
+			INSERT INTO PLANLIST 
+				( CREDATE, CNAME, CCONTENT, PROFESSOR, CROOM )
+			VALUES ( sysdate()
+				  , #cname#
+				  , #ccontent#
+				  , #professor#
+				  , #croom# )
+		]]>
+	</insert>
+	
+	<update id="planlistDAO.updatePlanList">
+		<![CDATA[
+			UPDATE PLANLIST
+			SET CREDATE=sysdate()
+				, CNAME=#cname#
+				, CCONTENT=#ccontent#
+				, PROFESSOR = #professor#
+				, CROOM = #croom# 
+			WHERE CNAME=#cname#
+		]]>
+	</update>
+	
+	<select id="planlistDAO.selectPlan" resultMap="PlanList">
+            SELECT
+                CREDATE, CNAME, CCONTENT
+                ,PROFESSOR
+                ,CROOM
+				FROM PLANLIST
+            WHERE CNAME=#cname#
+    </select>
+	
+	<delete id="planlistDAO.deletePlanList">
+		<![CDATA[
+			DELETE FROM PLANLIST 
+			WHERE CNAME=#cname#
+		]]>
+	</delete>
+	
+</sqlMap>

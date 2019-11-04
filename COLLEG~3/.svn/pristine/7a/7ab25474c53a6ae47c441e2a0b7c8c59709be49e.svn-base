@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="mainnews">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
+
+	<resultMap id="mainnews" class="egovframework.example.sample.service.MainNewsVO">
+		<result property="mno" column="mno"/>
+		<result property="mname" column="mname"/>
+		<result property="mcontent" column="mcontent"/>
+		<result property="stdate" column="stdate"/>
+		<result property="enddate" column="enddate"/>
+	</resultMap>
+	
+	<update id="mainnewsDAO.updateMainNews">
+		<![CDATA[
+			UPDATE MAINNEWS
+			SET MNO=#mno#
+				, MNAME=#mname#
+				, MCONTENT=#mcontent#
+				, STDATE = #stdate#
+				, ENDDATE = #enddate#
+			WHERE MNO=#mno#
+		]]>
+	</update>
+	
+	<select id="mainnewsDAO.selectMainNews" resultMap="mainnews">
+            SELECT
+                MNO, MNAME, MCONTENT
+                ,stdate
+                ,enddate
+				FROM MAINNEWS
+            WHERE MNO=#mno#
+    </select>
+	
+	<select id="mainnewsDAO.selectMainNewsList" parameterClass="searchVO" resultClass="egovMap">
+					SELECT
+						MNO, MNAME, MCONTENT, STDATE, ENDDATE
+					FROM MAINNEWS
+					WHERE 1=1
+					<isEqual prepend="AND" property="searchCondition" compareValue="0">
+						MNAME LIKE CONCAT('%',#searchKeyword#,'%')
+					</isEqual>
+					<isEqual prepend="AND" property="searchCondition" compareValue="1">
+						MCONTENT LIKE CONCAT('%',#searchKeyword#,'%')
+					</isEqual>
+					ORDER BY MNO DESC
+	</select>
+	
+	<select id="mainnewsDAO.selectMainNewsListTotCnt" parameterClass="searchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM MAINNEWS
+	</select>
+
+</sqlMap>

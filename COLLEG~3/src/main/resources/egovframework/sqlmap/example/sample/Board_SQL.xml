@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="board">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
+
+	<resultMap id="boardVO" class="egovframework.example.sample.service.BoardVO">
+		<result property="bid" column="bid" columnIndex="1"/>
+		<result property="bname" column="bname" columnIndex="2"/>
+		<result property="content" column="content" columnIndex="3"/>
+		<result property="writer" column="writer" columnIndex="4"/>
+		<result property="views" column="views" columnIndex="5"/>
+		<result property="atchFileId" column="ATCH_FILE_ID" columnIndex="6"/>
+	</resultMap>
+	
+	<insert id="boardDAO.insertBoard">
+		<![CDATA[
+			INSERT INTO BOARD 
+				( BID, BNAME, CONTENT, WRITER, ATCH_FILE_ID)
+			VALUES ( #bid#
+				  , #bname#
+				  , #content#
+				  , #writer#
+				  , #atchFileId# )
+		]]>
+	</insert>
+	
+	<select id="boardDAO.selectBoard" resultMap="boardVO">
+        <![CDATA[
+            SELECT
+                BID,
+                BNAME,
+				CONTENT, 
+				WRITER,
+				VIEWS,
+				IFNULL(ATCH_FILE_ID,0) ATCH_FILE_ID
+            FROM BOARD 
+            WHERE BNAME=#bname#
+        ]]>
+    </select>
+	
+	<select id="boardDAO.selectBoardList" parameterClass="searchVO" resultClass="egovMap">			
+					SELECT
+						BID, BNAME, CONTENT, WRITER, VIEWS
+					FROM BOARD
+					WHERE 1=1
+					<isEqual prepend="AND" property="searchCondition" compareValue="0">
+						BNAME LIKE CONCAT('%',#searchKeyword#,'%')
+					</isEqual>
+					<isEqual prepend="AND" property="searchCondition" compareValue="1">
+						WRITER LIKE CONCAT('%',#searchKeyword#,'%')
+					</isEqual>
+					ORDER BY BID DESC
+	</select>
+	
+	<select id="boardDAO.MainPage" parameterClass="searchVO" resultClass="egovMap">			
+			
+ 			SELECT BID, BNAME, CONTENT, WRITER, VIEWS
+			FROM BOARD
+			ORDER BY BNAME DESC
+	</select>
+	
+	<select id="boardDAO.selectBoardListTotCnt" parameterClass="searchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BOARD
+	</select>
+
+</sqlMap>

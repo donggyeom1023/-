@@ -1,0 +1,42 @@
+#logo > a {
+    font-size:8vw;
+    font-weight:bold;
+    text-transform:uppercase;
+}
+#logo {
+text-align:center;
+margin-bottom:2vw;
+margin-top:50px;
+}
+#logo1 > a {
+font-size:8vw;
+font-weight:bold;
+text-transform:uppercase;
+}
+#logo1 {
+text-align:center;
+margin-bottom:2vw;
+}
+.tbtd_caption {
+    font-weight:bold; 
+    color:#003366; 
+    background-color:#E5EDF3; 
+    text-align:right; 
+    padding:15px; 
+    margin:0;
+}
+.tbtd_bname, .tbtd_writer, .tbtd_content {
+    width: 80%;
+}
+input {
+    background-color:#FFF; 
+    border:1px solid #BCC8D8; 
+    color:#5e5e5e; 
+    cursor:text; 
+    height: 50px; 
+    width: 98%; 
+    border-collapse: collapse;">
+}
+.tbtd_content {
+    padding: 100px;
+}

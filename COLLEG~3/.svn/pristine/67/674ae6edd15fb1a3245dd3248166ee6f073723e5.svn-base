@@ -1,0 +1,159 @@
+#mainHeader {
+    font-size: 4vw;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    color: inherit;
+    text-decoration: none;
+}
+#sec1 {
+    text-align: right;
+}
+h1 {
+    font-size: 15px;
+    text-align: center;
+    border: 1px solid #000000fd;
+    padding:3%;
+}
+body {
+    width: 40%;
+    margin: 0 auto;
+    word-break: keep-all;
+}
+#mainHeader {
+    font-size: 8vw;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    color: inherit;
+    text-decoration: none;
+}
+.left-side-bar {
+  position:fixed;
+  top:0;
+  left:-180px;
+  width:200px;
+  height:100%;
+  background-color:#89cbdd;
+  transition:left .3s;
+}
+.left-side-bar:hover {
+    left:0;
+}
+.left-side-bar > .status-ico {
+    text-align:right;
+  }
+  .left-side-bar > .status-ico > span:last-child {
+    display:none;
+  }
+  .left-side-bar:hover > .status-ico > span:last-child {
+    display:block;
+  }
+  .left-side-bar:hover > .status-ico > span:first-child {
+    display:none;
+  }
+  .menu {
+    text-align:left;
+  
+  }
+  .menu ul {
+    background-color:#89cbdd;
+  }
+  .menu > ul {
+    display:inline-block;
+    padding:0 10px;
+    border-radius:5px;
+  }
+  .menu ul > li > a {
+    display:block;
+    padding:10px;
+  }
+  .menu ul > li:hover > a {
+    background-color:black;
+    color:white;
+  }
+  .menu .sub2 {
+    display:none;    
+  }
+  .menu #hover:hover > .sub2{
+    display: block;
+  }
+ 
+.con {
+    max-width:1000px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  
+  
+  .img-box > img {
+    width:100%;
+    display:block;
+  }
+  
+  .img-box > img {
+    width:100%;
+    display:block;
+  }
+  
+  .con {
+    margin-top:40px;
+    margin-bottom:40px;
+  }
+  
+  #logo > a {
+    font-size:8vw;
+    font-weight:bold;
+    text-transform:uppercase;
+  }
+  
+  #logo {
+    text-align:center;
+    margin-bottom:2vw;
+    margin-top:50px;
+  }
+  #logo1 > a {
+    font-size:8vw;
+    font-weight:bold;
+    text-transform:uppercase;
+  }
+  
+  #logo1 {
+    text-align:center;
+    margin-bottom:2vw;
+  }
+ 
+.menu > li {
+    text-decoration:none;
+  }
+  
+  #sec1{
+    text-align:right;
+  }
+  section {
+    display:block;
+    text-align:center;
+    font-weight:bold;
+  }
+  section > a {
+    width:100px;
+    display:inline-block;
+    text-align:right;
+    font-size: 12px;
+  }
+  
+  section > a:hover {
+    color:red;
+  }
+  ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 25px;
+}
+.select {
+  margin: 0 auto;
+}

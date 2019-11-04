@@ -1,0 +1,125 @@
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c"      uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form"   uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="ui"     uri="http://egovframework.gov/ctl/ui"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%
+  /**
+  * @Class Name : egovSampleList.jsp
+  * @Description : Sample List 화면
+  * @Modification Information
+  *
+  *   수정일         수정자                   수정내용
+  *  -------    --------    ---------------------------
+  *  2009.02.01            최초 생성
+  *
+  * author 실행환경 개발팀
+  * since 2009.02.01
+  *
+  * Copyright (C) 2009 by MOPAS  All right reserved.
+  */
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>	
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+<title>주요소식</title>
+<link rel="stylesheet"  href="<c:url value='/css/egovframework/bootstrap.css'/>">
+<script type="text/javaScript" language="javascript" defer="defer">
+        function fn_egov_selectBoard() {
+        	document.listForm.action = "<c:url value='/boardList.do'/>";
+           	document.listForm.submit();
+        }
+    </script>
+</head>
+<body style="text-align:center; margin:0 auto; display:inline; padding-top:100px;">
+    <div class="left-side-bar">
+    <div class="status-ico">
+    <span>▶</span><span>▼</span>
+        </div>
+        <div id="nav">
+        <ul class="menu">
+        <li><h3><a href="#">카테고리</h3></a>
+        <ul class="sub">
+        <li><a href="#">1. 출결관리</a></li>
+        <li><a href="#">2. 강의시간표</a></li>
+        <li><a href="#">3. 대학 홈페이지</a></li>
+        </ul>
+        </li>
+        </ul>
+        </div>
+    </div>
+    <header id="mainHeader">
+        <div id = "logo"><a href="main(학생용) - 로그인시.html">E Z E N</a></div>
+    </header>
+    <section>
+                |
+                <!-- a 는 기본적으로 display:inline; 이다. -->
+                <!-- inline 에는 width, height, padding, margin 등이 작동하지 않는다. -->
+                <a href="javascript:fn_egov_selectBoard()">공지사항</a>
+                |
+                <a href="#" target="_blank">자유게시판</a>
+                |
+                <a href="#">주요소식</a>
+                |
+    </section>
+        <section id="sec1">
+                
+                <a href="#" target="_blank">Logout</a>
+                
+        </section> 
+    <form:form commandName="searchVO" id="listForm" name="listForm" method="post">
+        <input type="hidden" name="selectedId" />
+        <div id="content_pop">
+        	<!-- List -->
+        	<div class="table">
+        		<table width="100%" border="0" cellpadding="0" cellspacing="0" summary="ID, 제목, 내용, 작성자, 조회수">
+        			<caption style="visibility:hidden">ID, 제목, 내용, 작성자, 조회수</caption>
+        			<colgroup>
+        				<col width="20"/>
+        				<col width="50"/>
+        				<col width="100"/>
+        				<col width="80"/>
+        				<col width="80"/>
+        			</colgroup>
+        			<tr>
+        				<th align="center">NO</th>
+        				<th align="center">제목</th>
+        				<th align="center">내용</th>
+        				<th align="center">시작일자</th>
+        				<th align="center">종료일자</th>
+        			</tr>
+        			<c:forEach var="result" items="${resultList}" varStatus="status">
+            			<tr>
+            				<td align="center" class="listtd"><c:out value="${result.mno}"/></td>
+            				<td align="center" class="listtd"><c:out value="${result.mname}"/></td>
+            				<td align="center" class="listtd"><c:out value="${result.mcontent}"/></td>
+            				<td>${result.stdate}</td>
+            				<td>${result.enddate}</td>
+            			</tr>
+        			</c:forEach>
+        		</table>
+        	</div>
+        	<!-- /List -->
+        	<div id="paging">
+        		<ui:pagination paginationInfo = "${paginationInfo}" type="image" jsFunction="fn_egov_link_page" />
+        		<form:hidden path="pageIndex" />
+        	</div>
+        	<div class="pr_list_search">
+	        <form name="searchBBSForm" method="get" action="/_prog/gboard/board.php">
+	        <input type="hidden" name="mode" value="list">
+	        <input type="hidden" name="type" value="">
+	        <input type="hidden" name="tmpl" value="">
+	        <input type="hidden" name="code" value="bachelor">
+	        <input type="hidden" name="linkid" value="0401">	
+	        <select id="sech_list" name="skey" class="pr_search_sel" align="center">
+	            <option value="bname" selected="selected">제목</option>
+	            <option value="writer">작성자</option>
+	        </select>
+	            <input type="text" id="pr_list_search_input" name="sval" title="검색어를 입력해주세요.">
+	            <input id="search" type="submit" value="검색">       
+		    </form>
+		    </div>
+        </div>
+    </form:form>
+</html>

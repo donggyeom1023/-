@@ -1,0 +1,36 @@
+--------------------------------------------------------
+--  파일이 생성됨 - 월요일-8월-05-2019   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Table LOGIN
+--------------------------------------------------------
+
+  CREATE TABLE "SCOTT"."LOGIN" 
+   (	"ID" VARCHAR2(20 BYTE), 
+	"PASSWORD" VARCHAR2(20 BYTE), 
+	"NAME" VARCHAR2(20 BYTE), 
+	"BIRTH" NUMBER(6,0), 
+	"GENDER" VARCHAR2(30 BYTE), 
+	"ADDR" VARCHAR2(20 BYTE), 
+	"PHONENUM" VARCHAR2(20 BYTE)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  TABLESPACE "USERS" ;
+REM INSERTING into SCOTT.LOGIN
+SET DEFINE OFF;
+--------------------------------------------------------
+--  DDL for Index SYS_C0011135
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SCOTT"."SYS_C0011135" ON "SCOTT"."LOGIN" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 NOCOMPRESS LOGGING
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  Constraints for Table LOGIN
+--------------------------------------------------------
+
+  ALTER TABLE "SCOTT"."LOGIN" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "SCOTT"."LOGIN" ADD PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 NOCOMPRESS LOGGING
+  TABLESPACE "USERS"  ENABLE;
